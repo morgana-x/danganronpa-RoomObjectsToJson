@@ -8,6 +8,8 @@ public partial class Program
     
     public static bool Loop(string[] args)
     {
+        Console.Clear();
+        Console.Title = "Room Editor";
         string filePath = "";
         if (args.Length > 0 ) 
         {
@@ -15,7 +17,14 @@ public partial class Program
         }
         else
         {
-            Console.WriteLine("Please Drag and Drop the room objects file\nor json you want to repack");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("Drag and Drop the Room Object File\n");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("(Always the third file in a map PAK file)\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("OR\n");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("The JSON you want to repack\n\n");
             filePath = Console.ReadLine().Replace("\"", string.Empty);
         }
         if (!filePath.EndsWith(".json"))
@@ -27,6 +36,9 @@ public partial class Program
             string json = entry.ToJson();
             File.WriteAllText(filePath + ".json", json);
             Process.Start("notepad.exe", filePath + ".json");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Extracted! Opening in notepad...");
+
         }
         else
         {
@@ -36,6 +48,11 @@ public partial class Program
             entry.WriteData(stream);
             stream.Close();
             entry = null;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Repacked!");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(filePath + "_repacked");
+
         }
 
         return args.Length > 0;
@@ -46,12 +63,14 @@ public partial class Program
         {
             if (Loop(args))
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Press any key to close");
                 Console.ReadKey();
                 break;
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
             }
