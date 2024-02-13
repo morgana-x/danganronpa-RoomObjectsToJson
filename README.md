@@ -1,4 +1,5 @@
 # danganronpa-RoomObjectsToJson
+A utility to edit objects in rooms etc
 https://wiki.spiralframework.info/view/RoomObject
 
 Run the program and drag and drop the file you want to extract, or the json you want to repack
