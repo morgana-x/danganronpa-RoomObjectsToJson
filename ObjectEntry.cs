@@ -18,7 +18,7 @@ namespace RoomData
 
         public int Unknown { get; set; }
 
-        private static float scale { get; } = 100;
+        //private static float scale { get; } = 1;
 
         public void ReadData(Stream stream)
         {
@@ -37,7 +37,7 @@ namespace RoomData
             for (int i = 0; i < Position.Length; i++)
             {
                 stream.Read(buffer);
-                Position[i] = (float)BitConverter.ToSingle(buffer) / scale;//ToInt32(buffer) / 10;
+                Position[i] = (float)BitConverter.ToSingle(buffer);
             }
 
             for (int i = 0; i < Size.Length; i++)
@@ -63,7 +63,7 @@ namespace RoomData
 
             for (int i = 0; i < Position.Length; i++)
             {
-                stream.Write(BitConverter.GetBytes(Position[i] * scale));
+                stream.Write(BitConverter.GetBytes(Position[i]));
             }
 
             for (int i = 0; i < Size.Length; i++)
